@@ -13,11 +13,15 @@ builder.Services.AddCors();
 
 builder.Services.AddDbContext<DataContext>(opts => opts.UseSqlServer(builder.Configuration["ConnectionStrings:ProductConnection"]).EnableSensitiveDataLogging(true));
 
+// o método AddControllers adiciona o suporte a controllers de serviço (que servem para APIs REST, por exemplo).
 builder.Services.AddControllers()
 	// adiciona suporte à respostas em application/json
 	.AddNewtonsoftJson()
 	// habilita as respostas também em application/xml
 	.AddXmlDataContractSerializerFormatters();
+
+// adiciona o suporte a controllers que exibem visualizações em HTML, que podem ser usados com a View Engine.
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddRateLimiter(opts =>
 {
@@ -71,9 +75,10 @@ app.UseMiddleware<TestMiddleware>();
 
 app.UseRateLimiter();
 app.UseOutputCache();
+app.UseStaticFiles();
 app.MapControllers();
 
-app.MapGet("/", () => "Hello World!");
+app.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
 
 app.UseSwagger();
 app.UseSwaggerUI(opts => opts.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApp"));

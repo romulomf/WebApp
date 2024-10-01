@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Product>
+@{
+	decimal average = Model.Average(p => p.Price);
+}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<link href="~/lib/css/output.css" rel="stylesheet">
+</head>
+<body>
+	<h6>Products</h6>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (Product p in Model)
+				{
+					<tr>
+						<td>@p.Name</td>
+						<td>@p.Price</td>
+						<td>@((p.Price / average * 100m).ToString("F1")) % of average</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿@model Product
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Products, Watersports | WebApp</title>
+	<meta charset="utf-8">
+	<link href="/lib/css/output.css" rel="stylesheet" />
+</head>
+<body>
+	<h6>Watersports</h6>
+	<div class="m-2">
+		<table>
+			<tbody>
+				<tr>
+					<th>Name</th>
+					<td>
+						@switch (Model.Name)
+						{
+							case "Kayak":
+								@:Small Boat
+								break;
+							case "Lifejacket":
+								@:Flotoation Aid
+								break;
+							default:
+								@Model.Name
+								break;
+						}
+					</td>
+				</tr>
+				<tr>
+					<th>Price</th>
+					<td>@Model.Price.ToString("c")</td>
+				</tr>
+				<tr>
+					<th>Category ID</th>
+					<td>@Model.CategoryId</td>
+				</tr>
+				<tr>
+					<th>Supplier ID</th>
+					<td>@Model.SupplierId</td>
+				</tr>
+				<tr>
+					<th>Tax</th>
+					<td>@(Model.Price * 0.2m)</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

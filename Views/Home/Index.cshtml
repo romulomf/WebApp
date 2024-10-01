@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Home | WebApp</title>
+	<meta charset="utf-8">
+	<link href="/lib/css/output.css" rel="stylesheet">
+</head>
+<body>
+	<h6 class="m-4">Product Table</h6>
+	<div class="m-2">
+		<table>
+			<tbody>
+				<tr>
+					<th>Name</th>
+					<td>@Model.Name</td>
+				</tr>
+				<tr>
+					<th>Price</th>
+					<td>@Model.Price.ToString("c")</td>
+				</tr>
+				<tr>
+					<th>Category ID</th>
+					<td>@Model.CategoryId</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
