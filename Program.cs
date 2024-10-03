@@ -23,6 +23,9 @@ builder.Services.AddControllers()
 // adiciona o suporte a controllers que exibem visualizações em HTML, que podem ser usados com a View Engine.
 builder.Services.AddControllersWithViews();
 
+// o cache é uma configuração que é também necessária quando for desejado trabalhar com sessão.
+builder.Services.AddDistributedMemoryCache();
+
 builder.Services.AddRateLimiter(opts =>
 {
 	opts.AddFixedWindowLimiter("fixedWindow", fixOpts =>
@@ -32,6 +35,9 @@ builder.Services.AddRateLimiter(opts =>
 		fixOpts.Window = TimeSpan.FromSeconds(15);
 	});
 });
+
+// configura que é necessário o uso do cookie para trabalhar com a sessão.
+builder.Services.AddSession(opts => opts.Cookie.IsEssential = true);
 
 //builder.Services.Configure<JsonOptions>(opts => opts.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault);
 
@@ -76,6 +82,8 @@ app.UseMiddleware<TestMiddleware>();
 app.UseRateLimiter();
 app.UseOutputCache();
 app.UseStaticFiles();
+// registra o middleware que faz o trabalho do controle de sessão.
+app.UseSession();
 app.MapControllers();
 
 app.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");

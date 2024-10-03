@@ -1,0 +1,25 @@
+﻿@model string
+@{
+	Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Encoding | WebApp</title>
+	<meta charset="utf-8">
+	<link href="~/lib/css/output.css" rel="stylesheet">
+</head>
+<body>
+	@*
+		Com o uso de @Html.Raw, é desabilitado o encoding do HTML
+		e se o texto que vier dos dados no Model contiver tags HTML
+		eles serão interpretados no navegador aplicado a estrutura
+		e estilização que eventualmente estas tags tenham.
+
+		É um recurso que em geral deve ser usado com cuidado, pois
+		pode representar um perigo permitir que dados dinâmicos que
+		tenham sido criados por usuários sejam interpretados na view.
+	*@
+	<div>@Html.Raw(Model)</div>
+</body>
+</html>

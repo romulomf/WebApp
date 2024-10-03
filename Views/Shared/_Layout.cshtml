@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>@ViewBag.Title</title>
+	<meta charset="utf-8">
+	<link href="~/lib/css/output.css" rel="stylesheet">
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th colspan="2">@RenderSection("Header", false)</th>
+			</tr>
+		</thead>
+		<tbody>
+			@RenderBody()
+		</tbody>
+		<tfoot>
+			<tr>
+				<th colspan="2">@RenderSection("Footer", false)</th>
+			</tr>
+		</tfoot>
+	</table>
+	@{
+	/**
+	 * é possível testar se uma seção foi definida no arquivo que implementa
+	 * este arquivo de template e criar condicionais em fução disso.
+	 */
+	if (IsSectionDefined("Summary"))
+	{
+		@RenderSection("Summary", false)
+	}
+	else
+	{
+		<div>This is the default summary</div>
+	}
+	}
+</body>
+</html>
