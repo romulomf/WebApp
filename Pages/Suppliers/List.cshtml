@@ -1,0 +1,33 @@
+﻿@page "/lists/suppliers"
+@model ListModel
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using WebApp.Models;
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<link href="~/lib/css/output.css" rel="stylesheet">
+</head>
+<body>
+	<h5>Suppliers</h5>
+	<ul class="list-group m-2">
+		@foreach (string s in Model.Suppliers)
+		{
+			<li class="list-group-item">@s</li>
+		}
+	</ul>
+</body>
+</html>
+
+@functions {
+
+	public class ListModel(DataContext context) : PageModel
+	{
+		private DataContext context = context;
+		
+		public IEnumerable<string> Suppliers { get; set; } = Enumerable.Empty<string>();
+
+		public void OnGet() => Suppliers = context.Suppliers.Select(s => s.Name);
+	}
+}

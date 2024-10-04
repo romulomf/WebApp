@@ -1,0 +1,21 @@
+﻿@page "/noid"
+@using WebApp.Models;
+@model NotFoundModel
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Not Found</title>
+	<meta charset="utf-8">
+	<link href="~/lib/css/output.css" rel="stylesheet">
+</head>
+<body>
+	<div>No Matching ID</div>
+	<ul>
+		@foreach (Product p in Model.Products)
+		{
+			<li>@p.Name (ID: @p.ProductId)</li>
+		}
+	</ul>
+</body>
+</html>

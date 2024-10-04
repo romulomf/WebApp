@@ -1,0 +1,6 @@
+﻿@page "{id:long?}"
+@model IndexModel
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using WebApp.Models;
+<div>@Model.Product?.Name</div>
+<partial name="_ProductPartial" model="Model.Product" />

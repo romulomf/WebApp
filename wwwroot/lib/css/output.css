@@ -558,19 +558,10 @@ video {
   margin: 0.5rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .table {
   display: table;
-}
-
-.p-2 {
-  padding: 0.5rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }

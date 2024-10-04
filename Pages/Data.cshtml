@@ -1,0 +1,10 @@
+﻿@page
+@inject DataContext context;
+@using Microsoft.AspNetCore.Mvc.RazorPages
+<h5>Categories</h5>
+<ul>
+	@foreach (Category c in context.Categories)
+	{
+		<li>@c.Name</li>
+	}
+</ul>

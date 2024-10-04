@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,12 @@ builder.Services.AddRateLimiter(opts =>
 		fixOpts.Window = TimeSpan.FromSeconds(15);
 	});
 });
+
+// adiciona o suporte à páginas razor
+builder.Services.AddRazorPages();
+
+// esta configuração, adiciona além das convenções de rotas das páginas razor, um novo padrão de rota que atende uma rota da convenção /Index
+builder.Services.Configure<RazorPagesOptions>(opts => opts.Conventions.AddPageRoute("/Index", "/extra/page/{id:long?}"));
 
 // configura que é necessário o uso do cookie para trabalhar com a sessão.
 builder.Services.AddSession(opts => opts.Cookie.IsEssential = true);
@@ -85,6 +92,8 @@ app.UseStaticFiles();
 // registra o middleware que faz o trabalho do controle de sessão.
 app.UseSession();
 app.MapControllers();
+// adiciona o suporte ao roteamento de URLs às páginas razor.
+app.MapRazorPages();
 
 app.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
 
